@@ -2,7 +2,7 @@
   "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
   "IsCustomNode": false,
   "Description": "",
-  "Name": "BIMACON_Deletar Eletrodutos Duplicados_script",
+  "Name": "2021_14-1_BIMACON_Deletar Eletrodutos Duplicados_script",
   "ElementResolver": {
     "ResolutionMap": {}
   },
@@ -878,36 +878,6 @@
       "Description": "Retorna o número de itens armazenados na determinada lista.\n\nList.Count (list: var[]..[]): int"
     },
     {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Orchid.Common.String.FromList@var[]..[]",
-      "Id": "7c3554c6c4984e1f82111e73b4f61933",
-      "Inputs": [
-        {
-          "Id": "b2599ec8f54d4340a4ee923151887ac3",
-          "Name": "list",
-          "Description": "List of objects to concatenate.\n\nvar[]..[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "fbc856496f674b2183c00c13b7fc497f",
-          "Name": "string",
-          "Description": "String made from list of strings.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Concatenates list values to multiple line string.\n\nString.FromList (list: var[]..[]): string"
-    },
-    {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
       "Code": "# Importar as bibliotecas necessárias do Revit\r\nimport clr\r\nclr.AddReference(\"RevitServices\")\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nclr.AddReference(\"RevitAPI\")\r\nclr.AddReference(\"RevitAPIUI\")\r\nfrom Autodesk.Revit.UI import TaskDialog\r\n\r\n# Pegar a entrada do Dynamo\r\nmensagem = IN[0]\r\n\r\n# Criar a TaskDialog\r\ntask_dialog = TaskDialog(\"Ok\")\r\ntask_dialog.MainInstruction = mensagem\r\n\r\n# Exibir a TaskDialog\r\ntask_dialog.Show()\r\n\r\n# Saída do script\r\nOUT = \"Sucesso!\"\r\n",
@@ -1057,6 +1027,37 @@
       ],
       "Replication": "Disabled",
       "Description": "Todas as categorias incorporadas."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Carregar as bibliotecas DesignScript e padrão do Python\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# Função para concatenar os valores de uma lista em uma única string com múltiplas linhas\r\ndef concatenate_list_to_string(input_list, delimiter=\"\\n\"):\r\n    # Verifica se a entrada é uma lista\r\n    if not isinstance(input_list, list):\r\n        return \"A entrada deve ser uma lista.\"\r\n    \r\n    # Converte todos os elementos para string e junta com o delimitador especificado\r\n    result = delimiter.join(str(item) for item in input_list)\r\n    return result\r\n\r\n# Entrada pelo nó do Dynamo\r\nlista = IN[0]  # Lista de valores a serem concatenados\r\ndelimitador = IN[1] if len(IN) > 1 else \"\\n\"  # Delimitador opcional, padrão é nova linha\r\n\r\n# Saída para o Dynamo\r\nOUT = concatenate_list_to_string(lista, delimitador)",
+      "VariableInputPorts": true,
+      "Id": "ffaa5912dc9f400abc2c65e8d950fcb7",
+      "Inputs": [
+        {
+          "Id": "7c1a6707dcca4999a0930f0b20d395e0",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ffa6efe2863f45a79447f929efec4163",
+          "Name": "OUT",
+          "Description": "Resultado do script Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Executa um script IronPython incorporado."
     }
   ],
   "Connectors": [
@@ -1172,8 +1173,8 @@
     },
     {
       "Start": "8985f35452f341b89efb98a4840898ab",
-      "End": "b2599ec8f54d4340a4ee923151887ac3",
-      "Id": "307003dea87d45f3a1b71006b8f63841"
+      "End": "7c1a6707dcca4999a0930f0b20d395e0",
+      "Id": "1b34fdced6e14ada9b65441938a5814a"
     },
     {
       "Start": "71b8d4b7df4642a9a760bc94aa4fb789",
@@ -1206,11 +1207,6 @@
       "Id": "56d46760f9074bf692ca4e1a07ca7e2e"
     },
     {
-      "Start": "fbc856496f674b2183c00c13b7fc497f",
-      "End": "bcb806265017487192fe380ec8e1f4e7",
-      "Id": "bc8be5baea3b4c37a572da8f84195f2b"
-    },
-    {
       "Start": "4a1195314dd44314aa23ca5e353b6d93",
       "End": "5dccf6b1eef74958b041424eaad72efb",
       "Id": "0ec68785fede4feeb4b9894b74777f41"
@@ -1234,6 +1230,11 @@
       "Start": "f17597fa88874bb38fc86e92e0d1646d",
       "End": "f7639dfe170b46f899edaf87510b39d8",
       "Id": "220579cd8ffa4fadace68a92044ff4f1"
+    },
+    {
+      "Start": "ffa6efe2863f45a79447f929efec4163",
+      "End": "bcb806265017487192fe380ec8e1f4e7",
+      "Id": "faea10952efd4c30b0d978617cac36f2"
     }
   ],
   "Dependencies": [
@@ -1254,14 +1255,6 @@
       "ReferenceType": "Package",
       "Nodes": [
         "af85da728ae04e25aedc772dc2c8e700"
-      ]
-    },
-    {
-      "Name": "Orchid",
-      "Version": "2.6.10.6373",
-      "ReferenceType": "Package",
-      "Nodes": [
-        "7c3554c6c4984e1f82111e73b4f61933"
       ]
     }
   ],
@@ -1289,304 +1282,304 @@
     },
     "NodeViews": [
       {
-        "ShowGeometry": true,
-        "Name": "Element.Delete",
         "Id": "e383060884594350b11cb7a060260031",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Element.Delete",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1714.9642840610065,
         "Y": -43.977097384381693
       },
       {
-        "ShowGeometry": true,
-        "Name": "List.GetItemAtIndex",
         "Id": "22c2aabbca99416f83d093c8311d37cf",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List.GetItemAtIndex",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1438.3775601375035,
         "Y": 199.27604831171374
       },
       {
-        "ShowGeometry": true,
-        "Name": "Python Scripts",
         "Id": "6304c39070294bf19f56b274978c1491",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Python Scripts",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1339.2874968033557,
         "Y": 351.24237337975552
       },
       {
-        "ShowGeometry": true,
-        "Name": "All Elements of Category",
         "Id": "efbec103359b4b3f94bacbd4a4ddfaf5",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "All Elements of Category",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 43.251116210539976,
         "Y": 75.259491552446732
       },
       {
-        "ShowGeometry": true,
-        "Name": "Element.Location+",
         "Id": "cee89ad809a747989c50f6231ba1733c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Element.Location+",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 489.61362209673928,
         "Y": 255.07639263840224
       },
       {
-        "ShowGeometry": true,
-        "Name": "List.GetItemAtIndex",
         "Id": "7ff86e55b95245d28e5e17f0c0d6c938",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List.GetItemAtIndex",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 892.31795060896332,
         "Y": 223.43283649474893
       },
       {
-        "ShowGeometry": true,
-        "Name": "Code Block",
         "Id": "70fc1c16101f49da8ffb4cfc28284cd5",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 782.28631955658454,
         "Y": 371.42003389467811
       },
       {
-        "ShowGeometry": true,
-        "Name": "List.GetItemAtIndex",
         "Id": "13d0604efaf844ab9d96d786a88eaa73",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List.GetItemAtIndex",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 896.9203283546542,
         "Y": 433.02089746959513
       },
       {
-        "ShowGeometry": true,
-        "Name": "Data.ExportExcel",
         "Id": "d45a779d9d7c4e5493d0b31e7b7ef016",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Data.ExportExcel",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2460.2894501846254,
         "Y": 398.56397229590766
       },
       {
-        "ShowGeometry": true,
-        "Name": "Code Block",
         "Id": "12a305c7d85b45d4b5def24376151f4c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2292.3537619793851,
         "Y": 488.148411407897
       },
       {
-        "ShowGeometry": true,
-        "Name": "Code Block",
         "Id": "9d1a8b9c54a542519ba278cc4e11f142",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2179.3083015974216,
         "Y": 413.70337330803608
       },
       {
-        "ShowGeometry": true,
-        "Name": "Boolean",
         "Id": "6b428e22184c42c481cc0aa019d7d21c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Boolean",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2251.1386255572061,
         "Y": 582.78791119748485
       },
       {
-        "ShowGeometry": true,
-        "Name": "Directory Path",
         "Id": "c4b0a356df5a44e8a9751e224a0c3b7e",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Directory Path",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2289.1413040452626,
         "Y": 324.33761003996341
       },
       {
-        "ShowGeometry": true,
-        "Name": "Element.Id",
         "Id": "d85b8872500743f1a2ee1ad2be2d92e4",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Element.Id",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1590.2415537005309,
         "Y": 434.92760554137681
       },
       {
-        "ShowGeometry": true,
-        "Name": "List Create",
         "Id": "78e80f36a3f140feb3fc75d835858ec1",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List Create",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2010.0699383156225,
         "Y": 395.95466887870236
       },
       {
-        "ShowGeometry": true,
-        "Name": "List.Flatten",
         "Id": "aebe52ca5a974ad496c9cc47a042965c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List.Flatten",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1772.3023424874086,
         "Y": 195.00939580527097
       },
       {
-        "ShowGeometry": true,
-        "Name": "List.Transpose",
         "Id": "98e95f142c504b7c9a676f5ec773166a",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List.Transpose",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1815.6624085848953,
         "Y": 446.96985212913711
       },
       {
-        "ShowGeometry": true,
-        "Name": "Points.Midpoint",
         "Id": "af85da728ae04e25aedc772dc2c8e700",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Points.Midpoint",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1098.3309667969579,
         "Y": 334.4956183818914
       },
       {
-        "ShowGeometry": true,
-        "Name": "If",
         "Id": "6289e1c19bfb4c50872ea67600616a60",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "If",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 3098.3862520136436,
         "Y": -154.26154339753555
       },
       {
-        "ShowGeometry": true,
-        "Name": ">",
         "Id": "1f95475b9e7947a3bf98cf89c5b23bc5",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": ">",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2875.942481846314,
         "Y": -282.5855290112446
       },
       {
-        "ShowGeometry": true,
-        "Name": "Code Block",
         "Id": "d4a1eb71972b4780997f2d3e8ce744af",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2487.871224443687,
         "Y": 89.721722258474131
       },
       {
-        "ShowGeometry": true,
-        "Name": "Code Block",
         "Id": "dd45c89cb03e460e882c40a2b00b6865",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2073.0117768405939,
         "Y": -152.23251361202654
       },
       {
-        "ShowGeometry": true,
-        "Name": "Code Block",
         "Id": "47027e2246c94f3ebfc6aa18209ad6fc",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2712.3583588311139,
         "Y": -247.34773539733453
       },
       {
-        "ShowGeometry": true,
-        "Name": "List.Count",
         "Id": "33dde6a3c39142fbaec634b63ccd5cd2",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List.Count",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 2275.8721697790243,
         "Y": -570.76503593856557
       },
       {
-        "ShowGeometry": true,
-        "Name": "o|String.FromList",
-        "Id": "7c3554c6c4984e1f82111e73b4f61933",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 3258.9400345814242,
-        "Y": -142.54656940465151
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Python Script",
         "Id": "89a46924fb2543f2a1fe034e99b21201",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Python Script",
+        "ShowGeometry": true,
         "Excluded": false,
-        "X": 3464.231607307624,
-        "Y": -141.09664262411053
+        "X": 3567.5665135087897,
+        "Y": -143.44516321959159
       },
       {
-        "ShowGeometry": true,
-        "Name": "Categories",
         "Id": "e96798e41b6a4b2581b5bfd09c65ae72",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Categories",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": -370.7578530895056,
         "Y": 36.4416077907475
       },
       {
-        "ShowGeometry": true,
-        "Name": "List Create",
         "Id": "64a6866687e34354bca45aea4e68ea1f",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List Create",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": -140.72493202066735,
         "Y": 67.4064625907192
       },
       {
-        "ShowGeometry": true,
-        "Name": "List.Flatten",
         "Id": "7a680cb1579a4fa9b22bb5ae0e7256cb",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "List.Flatten",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 255.86323533114182,
         "Y": 72.178469500155472
       },
       {
-        "ShowGeometry": true,
-        "Name": "Categories",
         "Id": "5ca5df6b68f64553b1c10aacc58ab8c1",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Categories",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": -389.479219453841,
         "Y": 128.78675229543754
+      },
+      {
+        "Id": "ffaa5912dc9f400abc2c65e8d950fcb7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "String.FromList - Bimacon",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 3291.4104840881309,
+        "Y": -138.41542911225372
       }
     ],
     "Annotations": [
@@ -1600,12 +1593,11 @@
           "dd45c89cb03e460e882c40a2b00b6865",
           "47027e2246c94f3ebfc6aa18209ad6fc",
           "33dde6a3c39142fbaec634b63ccd5cd2",
-          "89a46924fb2543f2a1fe034e99b21201",
-          "7c3554c6c4984e1f82111e73b4f61933"
+          "89a46924fb2543f2a1fe034e99b21201"
         ],
         "Left": 2063.0117768405939,
         "Top": -623.76503593856557,
-        "Width": 1535.21983046703,
+        "Width": 1638.5547366681958,
         "Height": 806.48675819703976,
         "FontSize": 36.0,
         "InitialTop": -570.76503593856557,
@@ -1614,8 +1606,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -419.35482231305235,
-    "Y": 248.08512733703455,
-    "Zoom": 0.28314431020158931
+    "X": 235.00491397212673,
+    "Y": 188.51933433227367,
+    "Zoom": 0.16708353085864472
   }
 }
