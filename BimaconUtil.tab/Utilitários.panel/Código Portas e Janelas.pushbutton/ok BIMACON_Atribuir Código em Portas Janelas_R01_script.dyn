@@ -1731,27 +1731,6 @@
       "Description": "Filter Element By Phase Created\n\nElement.FilterByPhaseCreated (element: Element[], phase: Element): Element[]"
     },
     {
-      "ConcreteType": "DSRevitNodesUI.RevitPhases, DSRevitNodesUI",
-      "SelectedIndex": -1,
-      "SelectedString": "",
-      "Id": "6e4b29ad903b46e49d158132dea99b4b",
-      "NodeType": "ExtensionNode",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "a18216a468ea4e079fc326b7b8597ef2",
-          "Name": "Phase",
-          "Description": "O Phase selecionado",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Selecione uma fase do Revit existente do documento ativo."
-    },
-    {
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
       "FunctionSignature": "b409775c-5d88-4d47-96a3-5135c775d26a",
       "FunctionType": "Graph",
@@ -1858,96 +1837,6 @@
       "Replication": "Disabled",
       "Description": "Cria um número.",
       "InputValue": 1.0
-    },
-    {
-      "ConcreteType": "DSRevitNodesUI.RevitPhases, DSRevitNodesUI",
-      "SelectedIndex": -1,
-      "SelectedString": "",
-      "Id": "cd0d49171498424b97670360826f826b",
-      "NodeType": "ExtensionNode",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "b07b16769c904e8c8a5e2bf94603c82c",
-          "Name": "Phase",
-          "Description": "O Phase selecionado",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Selecione uma fase do Revit existente do documento ativo."
-    },
-    {
-      "ConcreteType": "DSRevitNodesUI.RevitPhases, DSRevitNodesUI",
-      "SelectedIndex": -1,
-      "SelectedString": "Reforma",
-      "Id": "f15e132124dd4d2687e3e224b70af28c",
-      "NodeType": "ExtensionNode",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "fa2cf7091dbb4659b76c75d6973b71b1",
-          "Name": "Phase",
-          "Description": "O Phase selecionado",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Selecione uma fase do Revit existente do documento ativo."
-    },
-    {
-      "ConcreteType": "CoreNodeModels.CreateList, CoreNodeModels",
-      "VariableInputPorts": true,
-      "Id": "9b7db1fab7cf44c2a36727c96df406a6",
-      "NodeType": "ExtensionNode",
-      "Inputs": [
-        {
-          "Id": "a5beedd0404f466c88474f6accbcaa96",
-          "Name": "item0",
-          "Description": "Índice do item nº 0",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "32260d7a11334c16bcaa80c7f1361294",
-          "Name": "item1",
-          "Description": "Índice do Item nº 1",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "9462f6a7e2bb48c58f5419d9f4fae3e5",
-          "Name": "item2",
-          "Description": "Índice do Item nº 2",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "03b234ed3ab9447c9fb2958ea6340a0e",
-          "Name": "list",
-          "Description": "Uma lista (tipo: var[]..[])",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Faz uma nova lista com base nas entradas fornecidas"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -2426,6 +2315,46 @@
       "Replication": "Disabled",
       "Description": "Permite que o código DesignScript seja criado diretamente",
       "Code": "//Condições IF\ntest == true ? verd : fals;"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a2d6ac21-2b65-40ff-8a95-5c5989400566",
+      "FunctionType": "Graph",
+      "Id": "670bd78bd3554dce85f0eb24afac7a60",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "09a9c69c18f04342a27fb43660a72c21",
+          "Name": "docOrLink",
+          "Description": "Uses current if none provided.\nAccepts document or link instance.\n\nvar[]..[]\nValor padrão : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a0c065e84cf74bb5badad8802a900848",
+          "Name": "phases",
+          "Description": "valor de retorno",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4f31135f3b5140f890b4ab975d0ab88b",
+          "Name": "names",
+          "Description": "valor de retorno",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns all phases in a document."
     }
   ],
   "Connectors": [
@@ -2796,12 +2725,6 @@
       "IsHidden": "False"
     },
     {
-      "Start": "a18216a468ea4e079fc326b7b8597ef2",
-      "End": "a5beedd0404f466c88474f6accbcaa96",
-      "Id": "fc2e5b3ebebc430981cbe5a1a0241f67",
-      "IsHidden": "False"
-    },
-    {
       "Start": "464d8a7f1d534250a1a05ab5ec144461",
       "End": "691671113dd34797817a4fcc748d9010",
       "Id": "892bf673b972498689512bc1e40747a3",
@@ -2820,24 +2743,6 @@
       "IsHidden": "False"
     },
     {
-      "Start": "b07b16769c904e8c8a5e2bf94603c82c",
-      "End": "32260d7a11334c16bcaa80c7f1361294",
-      "Id": "7cc977bd3d4e4f9d8f890154f369d28a",
-      "IsHidden": "False"
-    },
-    {
-      "Start": "fa2cf7091dbb4659b76c75d6973b71b1",
-      "End": "9462f6a7e2bb48c58f5419d9f4fae3e5",
-      "Id": "d3e2a9869c9141d6b656c76a6af432ec",
-      "IsHidden": "False"
-    },
-    {
-      "Start": "03b234ed3ab9447c9fb2958ea6340a0e",
-      "End": "1d665899d16d4723b463732151da83bf",
-      "Id": "b28d5c4689034bcdb6cf0f70d601c9fb",
-      "IsHidden": "False"
-    },
-    {
       "Start": "71d2d1e3dbe845ff933d1eb502a25992",
       "End": "33808c80e993451185202f4a552612eb",
       "Id": "b02d1ce2248c4d86985f2ad4fa935aa8",
@@ -2853,12 +2758,6 @@
       "Start": "74d3b0c0801d4cdb941b278d3712928d",
       "End": "e2a0986ddf9a4ac9a5666727c645f047",
       "Id": "0258cdd62d404cf99ee31e7c2aad8514",
-      "IsHidden": "False"
-    },
-    {
-      "Start": "9185090fb30b4138842169fca6311a5f",
-      "End": "d87b0ac06da7485493ab0aea6848cf3b",
-      "Id": "c2be392a0bda4fb684e5892736acf366",
       "IsHidden": "False"
     },
     {
@@ -2944,12 +2843,25 @@
       "End": "6bf25bbbaf1b4ab480f0abade8b0cff8",
       "Id": "2fd83edf879043f9a0001837d4611288",
       "IsHidden": "False"
+    },
+    {
+      "Start": "a0c065e84cf74bb5badad8802a900848",
+      "End": "1d665899d16d4723b463732151da83bf",
+      "Id": "6c033772f246431296552833136eb85b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4f31135f3b5140f890b4ab975d0ab88b",
+      "End": "d87b0ac06da7485493ab0aea6848cf3b",
+      "Id": "ff2beacf895448ba9684b1b4a863d2c7",
+      "IsHidden": "False"
     }
   ],
   "Dependencies": [
     "9fbd05c0-ec1f-4bd3-bf37-969a1552eab8",
     "b409775c-5d88-4d47-96a3-5135c775d26a",
-    "928e40a7-91ac-45c3-8d59-4d899fc49b83"
+    "928e40a7-91ac-45c3-8d59-4d899fc49b83",
+    "a2d6ac21-2b65-40ff-8a95-5c5989400566"
   ],
   "NodeLibraryDependencies": [
     {
@@ -2969,6 +2881,14 @@
       "ReferenceType": "Package",
       "Nodes": [
         "b70baf1ab5f842a4863d81a475b6e5b8"
+      ]
+    },
+    {
+      "Name": "Crumple",
+      "Version": "2021.9.24",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "670bd78bd3554dce85f0eb24afac7a60"
       ]
     },
     {
@@ -3333,8 +3253,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": -317.21920093755841,
-        "Y": -322.389055155801
+        "X": -439.0644798684333,
+        "Y": -384.43989164837615
       },
       {
         "Id": "c733ef2115b142af97dfff69ebbb0be9",
@@ -3527,16 +3447,6 @@
         "Y": 133.14385416400563
       },
       {
-        "Id": "6e4b29ad903b46e49d158132dea99b4b",
-        "Name": "Select Phase",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "ShowGeometry": true,
-        "X": -3361.6802269180384,
-        "Y": -1033.2519028812637
-      },
-      {
         "Id": "7477299cef22453ab45e581e07b4db73",
         "Name": "DropDown Data",
         "IsSetAsInput": false,
@@ -3553,8 +3463,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": -2588.8723942589918,
-        "Y": -1200.0537650482236
+        "X": -2611.8398691953639,
+        "Y": -1218.4277449973213
       },
       {
         "Id": "0c2f78471d1d454991141452efe2eb4f",
@@ -3565,36 +3475,6 @@
         "ShowGeometry": true,
         "X": -2510.0258011937917,
         "Y": -969.15860188142369
-      },
-      {
-        "Id": "cd0d49171498424b97670360826f826b",
-        "Name": "Select Phase",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "ShowGeometry": true,
-        "X": -3363.771276770553,
-        "Y": -909.16094980235289
-      },
-      {
-        "Id": "f15e132124dd4d2687e3e224b70af28c",
-        "Name": "Select Phase",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "ShowGeometry": true,
-        "X": -3366.6740205903561,
-        "Y": -783.479092031333
-      },
-      {
-        "Id": "9b7db1fab7cf44c2a36727c96df406a6",
-        "Name": "List Create",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "ShowGeometry": true,
-        "X": -2876.3802712065344,
-        "Y": -940.454389538051
       },
       {
         "Id": "55a422d267294b6fae57775b8ef791bc",
@@ -3613,8 +3493,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": -2886.3553563715955,
-        "Y": -1255.2532967308257
+        "X": -2970.5694311382927,
+        "Y": -1253.7221317350675
       },
       {
         "Id": "7574923a21724b1a99516cd48405cad8",
@@ -3735,6 +3615,16 @@
         "ShowGeometry": true,
         "X": 5979.5563333315067,
         "Y": -99.427405991900287
+      },
+      {
+        "Id": "670bd78bd3554dce85f0eb24afac7a60",
+        "Name": "© Phases",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -3363.309536978612,
+        "Y": -1033.0452740289093
       }
     ],
     "Annotations": [
@@ -3770,17 +3660,14 @@
           "7477299cef22453ab45e581e07b4db73",
           "598467f2b35249e994f05fee3591e246",
           "0c2f78471d1d454991141452efe2eb4f",
-          "6e4b29ad903b46e49d158132dea99b4b",
-          "cd0d49171498424b97670360826f826b",
-          "f15e132124dd4d2687e3e224b70af28c",
-          "9b7db1fab7cf44c2a36727c96df406a6",
           "55a422d267294b6fae57775b8ef791bc",
-          "1a939388e58f44e4ac239090677e20de"
+          "1a939388e58f44e4ac239090677e20de",
+          "670bd78bd3554dce85f0eb24afac7a60"
         ],
         "HasNestedGroups": false,
-        "Left": -3376.6740205903561,
+        "Left": -3373.309536978612,
         "Top": -1527.1519735505321,
-        "Width": 2597.8189875215303,
+        "Width": 2594.4545039097866,
         "Height": 1511.3871954084645,
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
@@ -3790,8 +3677,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -589.30317581020222,
-    "Y": 335.88802435594374,
-    "Zoom": 0.15409095395346692
+    "X": 742.19655671235478,
+    "Y": 469.09864055715548,
+    "Zoom": 0.168105691793055
   }
 }
